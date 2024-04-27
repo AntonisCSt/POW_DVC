@@ -1,0 +1,5 @@
+outs:
+- md5: ab339167070e9dcf1715197d3969f66e
+  size: 128
+  hash: md5
+  path: poems.txt
