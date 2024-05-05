@@ -62,9 +62,22 @@ outs:
 
 as you can see it added a hash and some other information.
 
-Also we not any longer tacking the `poems.txt`. See `.gitignore`. We track the dvc, hash file above!
+Also we not any longer track the `poems.txt`. See `.gitignore`. We track the dvc, hash file above!
 
+## Being complied with the dvc hash  
 
+`dvc checkout` # will change the files based on the dvc hash you have
+
+## Connect with remote storage
+
+dvc remote add local /tmp/dvc-storage
+dvc push -r local
+
+#### Delete cash
+
+``
+ 
+ Questions: How to change between data versions???
 
 
 
