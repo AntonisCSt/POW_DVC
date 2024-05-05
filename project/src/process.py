@@ -15,10 +15,10 @@ def load_and_preprocess():
     df['species'] = le.fit_transform(df['species'])
 
     # Save processed data
-    #df.to_csv('processed_iris.csv', index=False)
+    df.to_csv('./data/processed_iris.csv', index=False)
     return df
 
 if __name__ == "__main__":
     
     processed_df = load_and_preprocess()
-    print(processed_df.head)
+    print(processed_df.head())

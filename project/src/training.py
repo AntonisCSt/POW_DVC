@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from process import load_and_preprocess
+
 import yaml
 
 def train_model():
@@ -10,7 +10,7 @@ def train_model():
         params = yaml.safe_load(f)
 
     # Load data
-    df = load_and_preprocess()
+    df = pd.read_csv(params['processed_data_source'])
     X = df.drop('species', axis=1)
     y = df['species']
 
