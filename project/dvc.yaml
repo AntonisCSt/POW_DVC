@@ -5,7 +5,7 @@ stages:
     - data/iris.csv
     - src/process.py
     params:
-    - process.data_source
-    - process.processed_data_source
+    - data_source
+    - processed_data_source
     outs:
     - data/processed
