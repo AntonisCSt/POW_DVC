@@ -144,6 +144,39 @@ dvc stage add   -n process \
 
 Once you've added a stage, you can run the pipeline with `dvc repro`.
 
+let's add also the training stage:
+
+```
+dvc stage add   -n training \
+                -p n_estimators,random_state,processed_data_source,model_path \
+                -d src/process.py -d data/processed/processed_iris.csv \
+                -o model/model.pkl \
+                python src/training.py
+```
+
+running `dvc dag` we get:
+```bash
++-------------------+  
+| data/iris.csv.dvc |  
++-------------------+  
+          *            
+          *            
+          *            
+     +---------+       
+     | process |       
+     +---------+       
+          *            
+          *            
+          *            
+    +----------+       
+    | training |       
+    +----------+       
+```
+
+let's commit our work and continue with Metrics, Plots, and Parameters
+
+## Metrics, Plots, and Parameters
+
 
 
 #### Delete cash

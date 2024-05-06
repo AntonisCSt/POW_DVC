@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder 
 import yaml
 import os
 
@@ -27,6 +27,7 @@ def load_and_preprocess():
 
     # Save processed data
     df.to_csv(params['processed_data_source'], index=False)
+    
     return df
 
 if __name__ == "__main__":

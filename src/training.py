@@ -1,8 +1,9 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-
+import os
 import yaml
+import joblib
 
 def train_model():
     # Load parameters
@@ -20,6 +21,13 @@ def train_model():
     # Train model
     model = RandomForestClassifier(n_estimators=params['n_estimators'], random_state=params['random_state'])
     model.fit(X_train, y_train)
+
+        # Save the model
+    model_directory = 'model'
+    if not os.path.exists(model_directory):
+        os.makedirs(model_directory)
+    joblib.dump(model, params['model_path'])
+    print(f'Model saved to {params['model_path']}')
 
     # Evaluate model
     score = model.score(X_test, y_test)
