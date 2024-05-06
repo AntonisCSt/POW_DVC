@@ -28,6 +28,9 @@ stages:
     - model_path
     - test_data_path
     deps:
+    - data/processed/processed_iris.csv
+    - data/processed/test_iris.csv
+    - model/model.pkl
     - src/training.py
     outs:
     - eval

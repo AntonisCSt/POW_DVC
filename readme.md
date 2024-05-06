@@ -182,12 +182,53 @@ Adding the final stage:
 ```
 dvc stage add -n evaluate \
               -p model_path,test_data_path\
-              -d src/training.py \
+              -d src/training.py -d model/model.pkl -d data/processed/processed_iris.csv -d data/processed/test_iris.csv \
               -o eval \
               python src/evaluation.py
 ```
 
+to view the metrics we run `dvc metrics show`
 
+
+```
+Path               accuracy    step
+eval/metrics.json  0.93333     0
+```
+
+also the plots:
+`dvc plots show`
+
+## The dvc magic
+
+now let's change the n_estimators parameter to `n_estimators: 68` in `params.yaml`
+
+if we run `dvc status`
+we get:
+
+```bash
+(dvc_venv) ubuntu@ip-172-31-1-194:~/POW_DVC$ dvc status
+training:                                                                                                                                                                        
+        changed deps:
+                params.yaml:
+                        modified:           n_estimators
+```
+
+so we detected that n_estimators changed so if we run: `dvc repro` we get
+
+```
+'data/iris.csv.dvc' didn't change, skipping                                                                                                                                      
+Stage 'process' didn't change, skipping                                                                                                                                          
+Running stage 'training':                                                                                                                                                        
+> python src/training.py
+Model saved to model/model.pkl
+Test Accuracy: 0.9642857142857143
+Updating lock file 'dvc.lock'                                                                                                                                                    
+
+Stage 'evaluate' didn't change, skipping                                                                                                                                         
+
+To track the changes with git, run:
+
+```
 #### Delete cash
 
 ``
@@ -203,3 +244,16 @@ Troubleshoot:
 ```bash
 ERROR: failed to initiate DVC - C:\Users\AX-St\MyGIthub\POW_DVC is not tracked by any supported SCM tool (e.g. Git). Use `--no-scm` if you don't want to use any SCM or `--subdir` if initializing inside a subdirectory of a parent SCM repository.
 ```
+
+2) If you want to rewrite a stage with corrected dependences, parameters etc use --force flag:
+
+for example:
+
+```bash
+dvc stage add --force -n evaluate \
+              -p model_path,test_data_path\
+              -d src/training.py -d model/model.pkl -d data/processed/processed_iris.csv -d data/processed/test_iris.csv \
+              -o eval \
+              python src/evaluation.py
+```
+the propably you might have to run also `dvc repro --force`

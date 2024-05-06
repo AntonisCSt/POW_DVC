@@ -36,17 +36,29 @@ stages:
     params:
       params.yaml:
         model_path: model/model.pkl
-        n_estimators: 100
+        n_estimators: 68
         processed_data_source: data/processed/processed_iris.csv
         random_state: 42
     outs:
     - path: model/model.pkl
       hash: md5
-      md5: 613f124ea369d8657d607c0d2515e65c
-      size: 161156
+      md5: 26f37d9a6ab47b167f8656770c3c7409
+      size: 111408
   evaluate:
     cmd: python src/evaluation.py
     deps:
+    - path: data/processed/processed_iris.csv
+      hash: md5
+      md5: 128aee5cdd7b3bbb52b567b24543c71f
+      size: 2506
+    - path: data/processed/test_iris.csv
+      hash: md5
+      md5: 457a9f9d043a98443e06adf9dcc10f92
+      size: 328
+    - path: model/model.pkl
+      hash: md5
+      md5: 26f37d9a6ab47b167f8656770c3c7409
+      size: 111408
     - path: src/training.py
       hash: md5
       md5: 4616c493cb0f5c28c771234043b75878
@@ -58,6 +70,6 @@ stages:
     outs:
     - path: eval
       hash: md5
-      md5: 603bf24f8a495eaf6d2f11eb5690ee01.dir
-      size: 15907
+      md5: 083b39e34c2d0fe5ef57861b4412dbd0.dir
+      size: 15908
       nfiles: 2
