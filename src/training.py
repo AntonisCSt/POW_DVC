@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import os
 import yaml
-import joblib
+import pickle
 
 def train_model():
     # Load parameters
@@ -26,7 +26,10 @@ def train_model():
     model_directory = 'model'
     if not os.path.exists(model_directory):
         os.makedirs(model_directory)
-    joblib.dump(model, params['model_path'])
+    
+    with open(params['model_path'], 'wb') as f:
+        pickle.dump(model, f)
+    
     print(f'Model saved to {params['model_path']}')
 
     # Evaluate model

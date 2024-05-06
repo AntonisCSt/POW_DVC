@@ -7,6 +7,7 @@ stages:
     params:
     - data_source
     - processed_data_source
+    - test_data_path
     outs:
     - data/processed
   training:
@@ -21,3 +22,16 @@ stages:
     - random_state
     outs:
     - model/model.pkl
+  evaluate:
+    cmd: python src/evaluation.py
+    params:
+    - model_path
+    - test_data_path
+    deps:
+    - src/training.py
+    outs:
+    - eval
+metrics:
+- eval/metrics.json
+plots:
+- eval/plots/images

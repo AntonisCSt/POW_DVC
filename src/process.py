@@ -26,7 +26,14 @@ def load_and_preprocess():
         print("Folder already exists:", path)
 
     # Save processed data
-    df.to_csv(params['processed_data_source'], index=False)
+    df_excluding_last_15 = df.iloc[:-15]
+    df_excluding_last_15.to_csv(params['processed_data_source'], index=False)
+
+    # Select the last 15 rows of the DataFrame
+    last_15_rows = df.tail(15)
+
+    # Save the last 15 rows to a new CSV file
+    last_15_rows.to_csv(params['test_data_path'], index=False)
     
     return df
 

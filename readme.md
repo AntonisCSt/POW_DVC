@@ -177,6 +177,15 @@ let's commit our work and continue with Metrics, Plots, and Parameters
 
 ## Metrics, Plots, and Parameters
 
+Adding the final stage:
+
+```
+dvc stage add -n evaluate \
+              -p model_path,test_data_path\
+              -d src/training.py \
+              -o eval \
+              python src/evaluation.py
+```
 
 
 #### Delete cash
