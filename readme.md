@@ -135,7 +135,7 @@ Let's create some stages which going to be a part of out ml pipeline.
 we going to use the command:
 
 ```
-dvc stage add  --force -n process \
+dvc stage add   -n process \
                 -p data_source,processed_data_source \
                 -d src/process.py -d data/iris.csv \
                 -o data/processed \

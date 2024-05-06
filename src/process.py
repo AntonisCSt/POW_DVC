@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import yaml
+import os
 
 def load_and_preprocess():
     with open('params.yaml') as f:
@@ -13,6 +14,16 @@ def load_and_preprocess():
     # Encode labels
     le = LabelEncoder()
     df['species'] = le.fit_transform(df['species'])
+
+    path = 'data/processed/'
+
+    # Check if the directory already exists
+    if not os.path.exists(path):
+        # Create the directory if it doesn't exist
+        os.makedirs(path)
+        print("Folder created:", path)
+    else:
+        print("Folder already exists:", path)
 
     # Save processed data
     df.to_csv(params['processed_data_source'], index=False)
