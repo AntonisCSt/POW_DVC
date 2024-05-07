@@ -200,7 +200,7 @@ also the plots:
 
 ## The dvc magic
 
-now let's change the n_estimators parameter to `n_estimators: 68` in `params.yaml`
+now let's change the n_estimators parameter to `n_estimators: 54` in `params.yaml`
 
 if we run `dvc status`
 we get:
@@ -215,7 +215,8 @@ training:
 
 so we detected that n_estimators changed so if we run: `dvc repro` we get
 
-```
+```bash
+vc repro
 'data/iris.csv.dvc' didn't change, skipping                                                                                                                                      
 Stage 'process' didn't change, skipping                                                                                                                                          
 Running stage 'training':                                                                                                                                                        
@@ -224,9 +225,12 @@ Model saved to model/model.pkl
 Test Accuracy: 0.9642857142857143
 Updating lock file 'dvc.lock'                                                                                                                                                    
 
-Stage 'evaluate' didn't change, skipping                                                                                                                                         
-
-To track the changes with git, run:
+Running stage 'evaluate':                                                                                                                                                        
+> python src/evaluation.py
+WARNING:dvclive:Some DVCLive features are unsupported in `dvc repro`.
+To use DVCLive with a DVC Pipeline, run it with `dvc exp run`.
+Model loaded successfully: RandomForestClassifier(n_estimators=54, random_state=42)
+Updating lock file 'dvc.lock'                                                          
 
 ```
 #### Delete cash
