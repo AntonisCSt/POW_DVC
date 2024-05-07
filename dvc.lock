@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/iris.csv
       hash: md5
-      md5: ffc0f5d98b9f2c193deb31b2aea8d747
-      size: 4583
+      md5: 91d07857ce40086972252676c3c6ac09
+      size: 4722
     - path: src/process.py
       hash: md5
       md5: 36e1b1991c684d848cec1867ff986e41
@@ -19,16 +19,16 @@ stages:
     outs:
     - path: data/processed
       hash: md5
-      md5: 22ec8cb52c60caada795dd3e20e3b13c.dir
-      size: 2834
+      md5: c52b9ec4f7511af48c79b5f0b146d1f7.dir
+      size: 2924
       nfiles: 2
   training:
     cmd: python src/training.py
     deps:
     - path: data/processed/processed_iris.csv
       hash: md5
-      md5: 128aee5cdd7b3bbb52b567b24543c71f
-      size: 2506
+      md5: 087fd886c22e0b6c176cae81359e6af8
+      size: 2596
     - path: src/process.py
       hash: md5
       md5: 36e1b1991c684d848cec1867ff986e41
@@ -36,29 +36,29 @@ stages:
     params:
       params.yaml:
         model_path: model/model.pkl
-        n_estimators: 120
+        n_estimators: 20
         processed_data_source: data/processed/processed_iris.csv
         random_state: 42
     outs:
     - path: model/model.pkl
       hash: md5
-      md5: ef3291a6bc732621d51ee98838ff754d
-      size: 195553
+      md5: f91513ee4152d8364dada7b2b7e6cd00
+      size: 32016
   evaluate:
     cmd: python src/evaluation.py
     deps:
     - path: data/processed/processed_iris.csv
       hash: md5
-      md5: 128aee5cdd7b3bbb52b567b24543c71f
-      size: 2506
+      md5: 087fd886c22e0b6c176cae81359e6af8
+      size: 2596
     - path: data/processed/test_iris.csv
       hash: md5
-      md5: 457a9f9d043a98443e06adf9dcc10f92
+      md5: e492d9601f51c33f8a85e4d532615ec5
       size: 328
     - path: model/model.pkl
       hash: md5
-      md5: ef3291a6bc732621d51ee98838ff754d
-      size: 195553
+      md5: f91513ee4152d8364dada7b2b7e6cd00
+      size: 32016
     - path: src/training.py
       hash: md5
       md5: 4616c493cb0f5c28c771234043b75878
@@ -70,6 +70,6 @@ stages:
     outs:
     - path: eval
       hash: md5
-      md5: 549c5bf73d11a2feadc4ab33a63d7aa4.dir
-      size: 15904
+      md5: 1a62b7a7aeeaa38a96760526d0d3d7d3.dir
+      size: 15872
       nfiles: 2
