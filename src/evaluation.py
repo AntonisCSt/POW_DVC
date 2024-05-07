@@ -32,10 +32,8 @@ accuracy = metrics.accuracy_score(y_test, y_pred)
 conf_matrix = metrics.confusion_matrix(y_test, y_pred)
 
 # Log metrics
-if not live.summary:
-        live.summary = {"accuracy": {}}
 
-live.summary["accuracy"] = accuracy
+live.log_metric("acc", accuracy)
 
 fig, axes = plt.subplots(dpi=100)
 fig.subplots_adjust(bottom=0.2, top=0.95)

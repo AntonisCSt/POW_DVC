@@ -37,4 +37,6 @@ stages:
 metrics:
 - eval/metrics.json
 plots:
+- eval/plots/metrics:
+    x: step
 - eval/plots/images
